@@ -1,0 +1,36 @@
+{% liquid
+  assign products = collections.all.products | sort: 'id' | reverse
+%}
+
+<div class="mx-48 py-20">
+  <div class="text-center">
+    <p>Checkout the Lastest Motorcycles</p>
+    <h2 class="pt-4 font-bold text-3xl">Newest Motorcycles</h2>
+    <p class="pt-2 text-4xl group-hover:text-white">-</p>
+  </div>
+  <div class="owl-carousel owl-theme">
+    {% for product in products limit: 3 %}
+      <div class="item h-96">
+        <div class="mt-10 grid grid-cols-12 gap-4 h-full">
+          <div
+            class="col-span-7 bg-contain bg-no-repeat bg-center h-full"
+            style="background-image: url('{{ product.featured_image | image_url }}');"
+          ></div>
+          <div class="col-span-5 h-full">
+            <div class="inline-block align-middle">
+              <h2 class="pb-4 text-2xl font-bold">{{ product.title }}</h2>
+              <span class="py-4 leading-7">{{ product.description | truncate: 250 }}</span>
+              <p class="mt-8">
+                <a
+                  href="{{ product.url }}"
+                  class="p-5 bg-indigo-800 text-white rounded hover:bg-indigo-900 transition duration-300"
+                  >View Details</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div
+  id="modal-product"
+  tabindex="-1"
+  aria-hidden="true"
+  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 bottom-0 left-0 z-50 flex items-center justify-center w-full md:inset-0"
+>
+  <div class="fixed inset-0 bg-black opacity-50 pointer-events-none"></div>
+  <div class="relative p-4 w-full max-w-2xl max-h-full">
+    <!-- Modal content -->
+    <div class="relative shadow bg-white">
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-4 md:p-5 border-b">
+        <h3 class="text-xl font-semibold text-gray-700">Added to Cart</h3>
+        <button
+          id="modal-product-close"
+          type="button"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          data-modal-hide="default-modal"
+        >
+          {% render 'icon-close' %}
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="p-4 grid grid-cols-3 gap-4">
+        <div
+          id="modal-product-image"
+          class="relative h-20 bg-contain bg-no-repeat bg-center p-0 m-0 "
+          style="background-image: url('{{ product.featured_image | image_url }}');"
+        ></div>
+        <div class="col-span-2 text-gray-500">
+          <p id="modal-product-title" class="leading-relaxed text-xl"></p>
+          <p class="text-base leading-relaxed text-gray-500">Price: <span id="modal-product-price"></span></p>
+          <p class="text-base leading-relaxed text-gray-500">Quantity: <span id="modal-product-quantity"></span></p>
+          {% comment %}
+            <p class="text-base leading-relaxed text-gray-500">
+              ID: <input id="modal-product-id" type="text" value="{{ product.id }}">
+            </p>
+          {% endcomment %}
+          <input id="modal-product-id" type="hidden" value="{{ product.variants.first.id }}">
+          {% comment %} <input id="modal-product-image" type="hidden" value="{{ product.featured_image | image_url }}"> {% endcomment %}
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="text-right p-4 md:p-5 border-t border-gray-200">
+        <a
+          href="{{ routes.cart_url }}"
+          class="bg-indigo-700 hover:bg-indigo-950 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center"
+        >
+          View My Cart
+        </a>
+        <a
+          href="/checkout"
+          class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-800 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 bg-"
+        >
+          Checkout
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %}
+  <button
+    data-modal-target="default-modal"
+    data-modal-toggle="default-modal"
+    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    type="button"
+  >
+    Open Modal
+  </button>
+{% endcomment %}

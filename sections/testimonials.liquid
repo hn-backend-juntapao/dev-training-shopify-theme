@@ -1,0 +1,122 @@
+<div class="mx-32 py-20">
+  <div class="text-center">
+    <h2 class="pt-4 font-bold text-3xl">What Our Clients Say</h2>
+    <p class="pt-4 text-4xl group-hover:text-white">-</p>
+  </div>
+  <div class="px-6 py-20">
+    <div class="grid lg:grid-cols-3 sm:grid-cols-1 gap-6 text-center">
+      <div class="py-12 group border p-10 hover:bg-indigo-800 transition duration-300">
+        <p class="group-hover:font-white w-1/3 mx-auto">
+          <img
+            src="{{ section.settings.client_image_1 | image_url }}"
+            width="100%"
+            height="100%"
+            alt="{{ section.settings.client_name_1 }}"
+          >
+        </p>
+        <p class="pt-8 text-gray-800 group-hover:text-white transition">{{ section.settings.client_testimonial_1 }}</p>
+        <h2 class="pt-4 group-hover:text-white transition text-lg">{{ section.settings.client_name_1 }}</h2>
+      </div>
+      <div class="py-12 group border p-10 hover:bg-indigo-800 transition duration-300">
+        <p class="group-hover:font-white w-1/3 mx-auto">
+          <img
+            src="{{ section.settings.client_image_2 | image_url }}"
+            width="100%"
+            height="100%"
+            alt="{{ section.settings.client_name_2 }}"
+          >
+        </p>
+        <p class="pt-8 text-gray-800 group-hover:text-white transition">{{ section.settings.client_testimonial_2 }}</p>
+        <h2 class="pt-4 group-hover:text-white transition text-lg">{{ section.settings.client_name_2 }}</h2>
+      </div>
+      <div class="py-12 group border p-10 hover:bg-indigo-800 transition duration-300">
+        <div class="border-top single-service-item">
+          <p class="group-hover:font-white w-1/3 mx-auto">
+            <img
+              src="{{ section.settings.client_image_3 | image_url }}"
+              width="100%"
+              height="100%"
+              alt="{{ section.settings.client_name_3 }}"
+            >
+          </p>
+          <p class="pt-8 text-gray-800 group-hover:text-white transition">
+            {{ section.settings.client_testimonial_3 }}
+          </p>
+          <h2 class="pt-4 group-hover:text-white transition text-lg">{{ section.settings.client_name_3 }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Clients",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Client 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "client_image_1",
+      "label": "Client Image 1"
+    },
+    {
+      "type": "text",
+      "id": "client_name_1",
+      "label": "Client Name 1",
+      "default": "Tomas Lili"
+    },
+    {
+      "type": "text",
+      "id": "client_testimonial_1",
+      "label": "Client Testimonial 1",
+      "default": "Sed ut pers unde omnis iste natus error sit voluptatem accusantium dolor laudan rem aperiam, eaque ipsa quae ab illo inventore verit."
+    },
+    {
+      "type": "header",
+      "content": "Client 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "client_image_2",
+      "label": "Client Image 2"
+    },
+    {
+      "type": "text",
+      "id": "client_name_2",
+      "label": "Client Name 2",
+      "default": "Romi Rain"
+    },
+    {
+      "type": "text",
+      "id": "client_testimonial_2",
+      "label": "Client Testimonial 2",
+      "default": "Sed ut pers unde omnis iste natus error sit voluptatem accusantium dolor laudan rem aperiam, eaque ipsa quae ab illo inventore verit."
+    },
+    {
+      "type": "header",
+      "content": "Client 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "client_image_3",
+      "label": "Client Image 3"
+    },
+    {
+      "type": "text",
+      "id": "client_name_3",
+      "label": "Client Name 3",
+      "default": "John Doe"
+    },
+    {
+      "type": "text",
+      "id": "client_testimonial_3",
+      "label": "Client Testimonial 3",
+      "default": "Sed ut pers unde omnis iste natus error sit voluptatem accusantium dolor laudan rem aperiam, eaque ipsa quae ab illo inventore verit."
+    }
+  ]
+}
+{% endschema %}

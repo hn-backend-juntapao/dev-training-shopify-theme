@@ -1,0 +1,18 @@
+<div class="mx-48 py-10">
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search">
+    <div class="mt-4 grid grid-cols-12 gap-4">
+      <div class="col-span-10 ">
+        <input
+          class="p-4 border-2 border-gray-400 w-full"
+          type="search"
+          name="q"
+          placeholder="Search for Motorcycle..."
+          value="{{ search.terms }}"
+        >
+      </div>
+      <div class="col-span-2">
+        <button class="p-4 w-full bg-indigo-800 text-white hover:bg-indigo-900" type="submit">Search</button>
+      </div>
+    </div>
+  </form>
+</div>

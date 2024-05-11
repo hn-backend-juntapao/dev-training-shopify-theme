@@ -1,0 +1,56 @@
+<div class="px-64 py-20">
+  <div class="text-center">
+    <p>Here are your selected products for comparison</p>
+    <h2 class="pt-4 font-bold text-3xl">Product Comparison</h2>
+    <p class="pt-2 text-4xl group-hover:text-white">-</p>
+  </div>
+  <div id="product-compare" class="grid grid-cols-5 gap-4 text-grey-400">
+    <div></div>
+    <div class="col-span-2 compare-image relative h-80 bg-contain bg-no-repeat bg-center p-0 m-0"></div>
+    <div class="col-span-2 compare-image relative h-80 bg-contain bg-no-repeat bg-center p-0 m-0"></div>
+    <div class="text-indigo-800 text-right">Name</div>
+    <div class="col-span-2 compare-title text-xl text-center"></div>
+    <div class="col-span-2 compare-title text-xl text-center"></div>
+    <div class="text-indigo-800 text-right">Price</div>
+    <div class="col-span-2 compare-price text-lg text-center"></div>
+    <div class="col-span-2 compare-price text-lg text-center"></div>
+
+    {% comment %}
+      <div class="text-indigo-800 text-right">Break System</div>
+      <div class="col-span-2 specs-brake-system text-center"></div>
+      <div class="col-span-2 specs-brake-system text-center"></div>
+      <div class="text-indigo-800 text-right">Dimension</div>
+      <div class="col-span-2 specs-dimension text-center"></div>
+      <div class="col-span-2 specs-dimension text-center"></div>
+    {% endcomment %}
+  </div>
+  {% comment %}
+    <table id="product-compare" class="w-full">
+      <tr>
+        <td></td>
+        <td><div class="compare-image relative h-80 bg-contain bg-no-repeat bg-center p-0 m-0"></div></td>
+        <td><div class="compare-image relative h-80 bg-contain bg-no-repeat bg-center p-0 m-0"></div></td>
+      </tr>
+      <tr>
+        <td><div class="text-indigo-800 text-lg">Name</div></td>
+        <td><div class="compare-title text-2xl text-center"></div></td>
+        <td><div class="compare-title text-2xl text-center"></div></td>
+      </tr>
+      <tr>
+        <td><div class="text-indigo-800 text-lg">Price</div></td>
+        <td><div class="compare-price text-center"></div></td>
+        <td><div class="compare-price text-center"></div></td>
+      </tr>
+      <tr>
+        <td><div class="text-indigo-800 text-lg">Break System</div></td>
+        <td><div class="specs-brake-system text-center"></div></td>
+        <td><div class="specs-brake-system text-center"></div></td>
+      </tr>
+      <tr>
+        <td><div class="text-indigo-800 text-lg">Dimension</div></td>
+        <td><div class="specs-dimension text-center"></div></td>
+        <td><div class="specs-dimension text-center"></div></td>
+      </tr>
+    </table>
+  {% endcomment %}
+</div>

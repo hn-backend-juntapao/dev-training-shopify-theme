@@ -1,11 +1,12 @@
-<div class="mx-48 py-20">
+<div class="mx-32 py-20">
   <div class="text-center">
-    <h2 class="pt-4 font-bold text-3xl">Search Results</h2>
+    <p>Checkout our catalog</p>
+    <h2 class="pt-4 font-bold text-3xl">All Motorcycles</h2>
     <p class="pt-2 text-4xl group-hover:text-white">-</p>
   </div>
-  {% paginate search.results by 8 %}
+  {% paginate collection.products by 8 %}
     <div class="grid grid-cols-4 gap-6">
-      {% for product in search.results %}
+      {% for product in collection.products %}
         {% render 'product-card', product: product %}
       {% endfor %}
     </div>

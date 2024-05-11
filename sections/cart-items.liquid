@@ -1,0 +1,98 @@
+<div class="mx-48 py-10">
+  {% if cart != empty %}
+    <div class="text-center">
+      <p>These are your items for checkout</p>
+      <h2 class="pt-4 font-bold text-3xl">Your Cart</h2>
+      <p class="pt-2 text-4xl group-hover:text-white">-</p>
+    </div>
+    {% form 'cart', cart %}
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-5 p-2"></div>
+        <div class="col-span-3 p-2 text-center">Quantity</div>
+        <div class="col-span-2 p-2 text-right">Price</div>
+        <div class="col-span-2 p-2 text-center"></div>
+        {% for item in cart.items %}
+          <hr class="col-span-12">
+          <div class="col-span-5 p-2">
+            <img src="{{ item.image | image_url: height:100 }}" width="auto" height="auto">
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.price | money }}</p>
+          </div>
+          <div class="col-span-3 text-center">
+            <input
+              class="border p-4 inline-block w-full text-center"
+              type="number"
+              name="updates[]"
+              value="{{ item.quantity }}"
+            >
+          </div>
+          <div class="col-span-2 p-2 text-right">
+            <p class="my-2">{{ item.final_line_price | money }}</p>
+          </div>
+          <div class="col-span-2 px-2 text-center">
+            <a
+              class="my-2 px-4 py-2 bg-indigo-500 text-white hover:bg-indigo-900 block"
+              href="{{ item.url_to_remove }}"
+              >Remove</a
+            >
+          </div>
+        {% endfor %}
+
+        <hr class="col-span-12">
+
+        <div class="col-span-5"></div>
+        <div class="col-span-3 p-2 text-right font-bold"><p class="my-2">Total:</p></div>
+        <div class="col-span-2 p-2 text-right">
+          <p class="my-2 font-bold">{{ cart.total_price | money }}</p>
+        </div>
+        <div class="col-span-2 px-2 text-center">
+          <button
+            class="my-2 px-4 py-2 bg-indigo-500 text-white hover:bg-indigo-900 w-full"
+            type="submit"
+            name="update"
+          >
+            Update
+          </button>
+        </div>
+
+        <div class="col-span-10"></div>
+        <div class="col-span-2 text-center">
+          <button
+            class="my-2 p-4 bg-indigo-700 text-white hover:bg-indigo-900 w-full"
+            type="submit"
+            name="checkout"
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    {% endform %}
+  {% else %}
+    <div class="col-span-12 text-center text-red-600">Your cart is empty</div>
+  {% endif %}
+</div>
+
+<script>
+  {% comment %} let formData = {
+    items: [
+      {
+        id: 36110175633573, // Variant ID
+        quantity: 2, // Desired quantity
+      },
+    ],
+  };
+
+  fetch(window.Shopify.routes.root + 'cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    }); {% endcomment %}
+</script>

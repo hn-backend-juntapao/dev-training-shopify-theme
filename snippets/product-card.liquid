@@ -1,0 +1,11 @@
+<a href="{{ product.url }}" class="p-5 group">
+  <div class="border">
+    <div
+      class="h-64 bg-contain bg-no-repeat bg-center h-full group-hover:shadow-lg"
+      style="background-image: url('{{ product.featured_image | image_url }}');"
+    ></div>
+  </div>
+  <div class="pt-2 text-lg">{{ product.title | truncate: 25 }}</div>
+  <div class="pt-2">{{ product.price | money }}</div>
+  <div class="pt-2 text-sm text-gray-500">{{ product.description | truncate: 100 }}</div>
+</a>

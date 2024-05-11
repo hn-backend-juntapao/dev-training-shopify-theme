@@ -1,0 +1,54 @@
+<div
+  class="relative h-screen bg-cover bg-center p-0 m-0 bg-blue-600/30"
+  style="background-image: url('{{ section.settings.banner_image | image_url }}');"
+>
+  <div class="w-full h-full justify-center text-center bg-blue-600/30 backdrop-brightness-75">
+    <div class="pt-10 xl:px-64 lg:px-32 m-0">
+      <div class="grid grid-cols-3 gap-4 text-white pb-6">
+        <div class="shop-name text-2xl">{{ shop.name | upcase }}</div>
+        <div class="col-span-2 text-right">
+          <div class="text-right">
+            {% for link in linklists['main-menu'].links %}
+              <a href="{{ link.url }}">
+                <span class="ml-6 hover:text-violet-600 transition">{{ link.title | upcase }}</span>
+              </a>
+            {% endfor %}
+            <a href="{{ routes.cart_url }}">
+              <span class="ml-6 hover:text-violet-600 transition">CART</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-32">
+      <div class="pt-60 text-white text-4xl font-bold">{{ section.settings.banner_title | upcase }}</div>
+      <div class="pt-10 px-32 w-full text-lg text-white">{{ section.settings.banner_text }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Banner Title",
+      "default": "Get your desired motorcycle in reasonable price"
+    },
+    {
+      "type": "text",
+      "id": "banner_text",
+      "label": "Banner Text",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+  ]
+}
+{% endschema %}
