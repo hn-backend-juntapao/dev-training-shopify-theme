@@ -78,9 +78,9 @@ class JunProductCompare extends HTMLElement {
         const divProduct1 = document.createElement('div');
         const divProduct2 = document.createElement('div');
 
-        divLabel.setAttribute('class', 'text-indigo-800 text-right');
-        divProduct1.setAttribute('class', 'col-span-2 specs-brake-system text-center');
-        divProduct2.setAttribute('class', 'col-span-2 specs-brake-system text-center');
+        divLabel.setAttribute('class', 'text-indigo-800 md:text-right text-left md:text-base text-sm');
+        divProduct1.setAttribute('class', 'col-span-2 specs-brake-system md:text-base text-sm text-center');
+        divProduct2.setAttribute('class', 'col-span-2 specs-brake-system md:text-base text-sm text-center');
 
         divLabel.innerHTML = this.capitalizeFirstLetter(specification.id.replaceAll('_', ' '));
         divProduct1.innerHTML = specification.product1;
@@ -98,9 +98,15 @@ class JunProductCompare extends HTMLElement {
   }
 
   setComparison(elementIndex, productCompareObject) {
-    this.productCompare.querySelectorAll('.compare-image')[elementIndex].setAttribute('style', "background-image: url('" + productCompareObject.productImage + "');");
-    this.productCompare.querySelectorAll('.compare-title')[elementIndex].innerHTML = productCompareObject.productTitle;
-    this.productCompare.querySelectorAll('.compare-price')[elementIndex].innerHTML = productCompareObject.productPrice;
+    this.productCompare
+      .querySelectorAll('.compare-image')[elementIndex]
+      .setAttribute('style', `background-image: url('${productCompareObject.productImage}');`);
+    this.productCompare
+      .querySelectorAll('.compare-title')[elementIndex]
+      .innerHTML = productCompareObject.productTitle;
+    this.productCompare
+      .querySelectorAll('.compare-price')[elementIndex]
+      .innerHTML = productCompareObject.productPrice;
   }
 
   addToCompare() {
@@ -136,10 +142,20 @@ class JunProductCompare extends HTMLElement {
     this.setCookieObject(this.cooKey1, this.productCompareObject1, 3);
   }
 
-  checkIfTwoProducts() {
+  async checkIfTwoProducts() {
     // console.log('pasok');
     if(this.productCompareObject1.productId != null && this.productCompareObject2.productId != null) {
       window.location.reload();
+      // await fetch(window.location.pathname + '?sections=shopify-section-template--17152071336101__products-comparison')
+      //   .then(response => {
+      //     // console.log(response);
+      //     const dom = new DOMParser();
+      //     console.log(dom.parseFromString(response, 'text/html'));
+            
+          
+      //     // this.productCompare.innerHTML = newHtml;
+      //   })
+      // console.log('done');
     }
   }
 

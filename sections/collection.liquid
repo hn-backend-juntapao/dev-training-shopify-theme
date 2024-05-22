@@ -1,15 +1,17 @@
-<div class="mx-32 py-20">
-  <div class="text-center">
-    <p>Checkout our catalog</p>
-    <h2 class="pt-4 font-bold text-3xl">All Motorcycles</h2>
-    <p class="pt-2 text-4xl group-hover:text-white">-</p>
-  </div>
-  {% paginate collection.products by 8 %}
-    <div class="grid grid-cols-4 gap-6">
-      {% for product in collection.products %}
-        {% render 'product-card', product: product %}
-      {% endfor %}
+<jun-pagination>
+  <div id="pagination-testing" class="lg:mx-32 md:mx-8 mx-4 lg:py-20 md:py-16 py-10">
+    <div class="text-center">
+      <p>Checkout our catalog</p>
+      <h2 class="pt-4 font-bold text-3xl">All Motorcycles</h2>
+      <p class="pt-2 text-4xl group-hover:text-white">-</p>
     </div>
-    {% render 'pagination', paginate: paginate %}
-  {% endpaginate %}
-</div>
+    {% paginate collection.products by 8 %}
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      </div>
+      {% render 'pagination', paginate: paginate %}
+    {% endpaginate %}
+  </div>
+</jun-pagination>

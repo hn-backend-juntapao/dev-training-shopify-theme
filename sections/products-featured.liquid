@@ -1,18 +1,18 @@
 {% liquid
-  assign products = collections.all.products
+  assign products = collections.frontpage.products
 %}
 
-<div class="mx-32 py-20">
+<div class="lg:mx-32 md:mx-8 mx-4 lg:py-20 md:py-16 py-10">
   <div class="text-center">
     <p>Checkout the Featured Motorcycles</p>
     <h2 class="pt-4 font-bold text-3xl">Featured Motorcycles</h2>
     <p class="pt-2 text-4xl group-hover:text-white">-</p>
   </div>
-  <div class="grid grid-cols-4 gap-6">
+  <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
     {% for product in products %}
-      {% if forloop.index <= 8 %}
-        {% render 'product-card', product: product %}
-      {% endif %}
+      {% comment %} {% if forloop.index <= 8 %} {% endcomment %}
+      {% render 'product-card', product: product %}
+      {% comment %} {% endif %} {% endcomment %}
     {% endfor %}
   </div>
 </div>

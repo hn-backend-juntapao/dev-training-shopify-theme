@@ -2,16 +2,18 @@ class JunAddToCart extends HTMLElement {
   constructor() {
     super();
     this.modal = document.getElementById('modal-product');
+    this.modalTitle = document.getElementById('modal-title');
+    this.modalContent = document.getElementById('modal-content');
+    this.modalMessage = document.getElementById('modal-message');
     this.modalProductQuantity = document.getElementById('modal-product-quantity');
     this.modalProductPrice = document.getElementById('modal-product-price');
     this.modalProductId = document.getElementById('modal-product-id');
+    this.currency = document.getElementById('product-currency').value;
     this.addCartPath = '/cart/add';
   }
 
   connectedCallback() {
-    // this.addButton();
     this.setClose();
-    // this.setCheckOut();
     this.setForm();
   }
 
@@ -28,65 +30,94 @@ class JunAddToCart extends HTMLElement {
     closeButton.addEventListener('click', this.hideModal.bind(this));
   }
 
-  // setCheckOut() {
-  //   const checkOutButton = document.getElementById('modal-checkout');
-
-  //   checkOutButton.addEventListener('click', async () => {
-  //     const cartContents = await fetch(window.Shopify.routes.root + 'cart.js')
-  //       .then(response => response.json())
-  //       .then(data => { 
-  //         fetch('/cart', {
-  //           method: 'post',
-  //           body: new FormData(data),
-  //         });
-  //         return data
-  //       });
-  //   });
-  // }
-
   setForm() {
-    const forms = document.querySelectorAll('form[action="' + this.addCartPath + '"]');
+    const forms = document.querySelectorAll(`form[action="${this.addCartPath}"]`);
     forms.forEach((form) => {
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        
-        await fetch(this.addCartPath, {
-          method: 'post',
-          body: new FormData(form),
-        });
-        
-        await fetch(window.Shopify.routes.root + 'cart.js')
-          .then(response => response.json())
-          .then(data => { 
-            data.items.map((item) => {
-              // console.log(item.id, this.modalProductId.value, item.id == this.modalProductId.value);
-              if(item.id == this.modalProductId.value) {
-                this.modalProductQuantity.innerHTML = item.quantity;
-                this.modalProductPrice.innerHTML = this.setMoneyFormat(item.line_price / 100);
-                // console.log(item);
-              }
-            });
-          });
 
+        const formElements = form.querySelectorAll('[name]');
+        let formData = {
+          'items': [{
+            'id': 0,
+            'quantity': 0
+          }]
+        };
+
+        formElements.forEach(formElement => {
+          const name = formElement.getAttribute('name');
+          const value = formElement.value;
+          if(name == 'id') {
+            formData.items[0].id = value;
+          }
+          if(name == 'quantity') {
+            formData.items[0].quantity = value;
+          }
+        })
+       
+        const cartReponse = await fetch(`${window.Shopify.routes.root}cart/add.js`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(formData)
+          }
+        ).then(response => { return response.json(); });
+
+        // if(cartReponse.status == 422) {
+        //   this.modalContent.classList.add('hidden');
+        //   this.modalMessage.classList.remove('hidden');
+        //   this.modalTitle.innerHTML = cartReponse.message;
+        //   this.modalMessage.innerHTML = cartReponse.description;
+        // } else {
+        //   this.modalContent.classList.remove('hidden');
+        //   this.modalMessage.classList.add('hidden');
+        //   this.modalTitle.innerHTML = 'Added to cart';
+        //   this.modalProductQuantity.innerHTML = cartReponse.items[0].quantity;
+        //   this.modalProductPrice.innerHTML = this.setMoneyFormat(cartReponse.items[0].line_price / 100, this.currency);
+        // }
+        if(cartReponse.status == 422) {
+          this.modalContent.classList.add('hidden');
+          this.modalMessage.classList.remove('hidden');
+          this.modalTitle.innerHTML = cartReponse.message;
+          this.modalMessage.innerHTML = cartReponse.description;
+          this.showModal();
+          return;
+        } 
+
+        this.modalContent.classList.remove('hidden');
+        this.modalMessage.classList.add('hidden');
+        this.modalTitle.innerHTML = 'Added to cart';
+        this.modalProductQuantity.innerHTML = cartReponse.items[0].quantity;
+        this.modalProductPrice.innerHTML = this.setMoneyFormat(cartReponse.items[0].line_price / 100, this.currency);
         this.showModal();
+        
+        // await fetch(this.addCartPath, {
+        //   method: 'post',
+        //   body: new FormData(form),
+        // });
+        
+        // await fetch(window.Shopify.routes.root + 'cart.js')
+        //   .then(response => response.json())
+        //   .then(data => { 
+        //     data.items.map((item) => {
+        //       // console.log(item.id, this.modalProductId.value, item.id == this.modalProductId.value);
+        //       if(item.id == this.modalProductId.value) {
+        //         this.modalProductQuantity.innerHTML = item.quantity;
+        //         this.modalProductPrice.innerHTML = this.setMoneyFormat(item.line_price / 100, this.currency);
+        //         // console.log(item);
+        //       }
+        //     });
+        //   });
       });
     });
   }
 
-  setMoneyFormat(number) {
+  setMoneyFormat(number, currency) {
     const money = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'PHP',
+      currency: currency,
     });
     return money.format(number);
   }
-
-  setImage() {
-    const productTitle = document.getElementById('product-image');
-    const modalProductTitle = document.getElementById('modal-product-image');
-    modalProductTitle.value = productTitle.innerHTML;
-  }
-
 
   setTitle() {
     const productTitle = document.getElementById('product-title');
@@ -94,66 +125,8 @@ class JunAddToCart extends HTMLElement {
     modalProductTitle.innerHTML = productTitle.innerHTML;
   }
 
-  setPrice() {
-    const productPrice = document.getElementById('product-price');
-    // const modalProductPrice = document.getElementById('modal-product-price');
-    modalProductPrice.innerHTML = productPrice.innerHTML;
-  }
-
-  setQuantity() {
-    const productQuantity = document.getElementById('product-quantity');
-    // const modalProductQuantity = document.getElementById('modal-product-quantity');
-    this.modalProductQuantity.innerHTML = productQuantity.value;
-  }
-
-  sendToCart() {
-    // var cartContents = fetch(window.Shopify.routes.root + 'cart.js')
-    // .then(response => response.json())
-    // .then(data => { return data });
-
-    // console.log(cartContents);
-
-    // const form = document.getElementById('product_form_8628504821925');
-    // console.log(form.submit());
-
-    // const params = 'id=8628500856997&quantity=1';
-    // const params = {
-    //   'id': 36110175633573,
-    //   'quantity': 2
-    // }
-    // const xhttp = new XMLHttpRequest();
-    // xhttp.open('POST', '/cart/add');
-    // xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    // // xhttp.setRequestHeader('Content-type', 'application/json');
-    // xhttp.send(params);
-
-    // console.log(window.Shopify.routes.root+ 'cart/add.js');
-
-    // let formData = {
-    //   'items': [{
-    //     'id': 36110175633573,
-    //     'quantity': 2
-    //   }]
-    // };
-
-    // fetch(window.Shopify.routes.root + 'cart.js', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(formData)
-    // }).then(response => {
-    //    return response.json();
-    // }).catch((error) => {
-    //    console.error('Error:', error);
-    // });
-  }
-
   showModal() {
     this.setTitle();
-    // this.setPrice();
-    // this.setQuantity();
-    this.sendToCart();
     this.modal.classList.remove('hidden');
   }
 

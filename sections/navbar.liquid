@@ -4,18 +4,37 @@
   %}
 {% endcomment %}
 
-<div class="grid grid-cols-3 gap-4 text-white bg-black px-32 py-7">
-  <div class="shop-name text-xl">
+{% comment %}
+  <div class="grid grid-cols-3 gap-4 text-white bg-black px-32 py-7">
+    <div class="shop-name text-xl">
+      <a href="{{ routes.root_url }}">{{ shop.name | upcase }}</a>
+    </div>
+    <div class="col-span-2 text-right">
+      {% for link in linklists['main-menu'].links %}
+        <a href="{{ link.url }}">
+          <span class="ml-6 hover:text-violet-600 transition">{{ link.title | upcase }}</span>
+        </a>
+      {% endfor %}
+      <a href="{{ routes.cart_url }}" class="w-7">
+        {% comment %} <span class="ml-6 hover:text-violet-600 transition">{% render 'icon-shopping-bag', class: class %}</span> {% endcomment %}
+        <span class="ml-6 hover:text-violet-600 transition">CART</span>
+      </a>
+    </div>
+  </div>
+{% endcomment %}
+
+<div class="grid grid-cols-3 gap-4 text-white bg-black lg:px-32 px-4 py-7">
+  {% comment %} <div class="grid grid-cols-3 gap-4 text-white bg-black lg:px-32 px-4 py-7 inline"> {% endcomment %}
+  <div class="shop-name lg:col-span-1 col-span-3 text-xl lg:text-left text-center">
     <a href="{{ routes.root_url }}">{{ shop.name | upcase }}</a>
   </div>
-  <div class="col-span-2 text-right">
+  <div class="lg:col-span-2 col-span-3 lg:text-right text-center">
     {% for link in linklists['main-menu'].links %}
       <a href="{{ link.url }}">
         <span class="ml-6 hover:text-violet-600 transition">{{ link.title | upcase }}</span>
       </a>
     {% endfor %}
     <a href="{{ routes.cart_url }}" class="w-7">
-      {% comment %} <span class="ml-6 hover:text-violet-600 transition">{% render 'icon-shopping-bag', class: class %}</span> {% endcomment %}
       <span class="ml-6 hover:text-violet-600 transition">CART</span>
     </a>
   </div>

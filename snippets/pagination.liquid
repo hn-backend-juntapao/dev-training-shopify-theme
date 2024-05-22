@@ -1,31 +1,38 @@
 {% if paginate.pages > 1 %}
-  <div class="mt-4 p-10 text-center flex-auto">
-    {%- if paginate.previous -%}
-      <a
-        href="{{ paginate.previous.url }}"
-        class="p-4 bg-indigo-800 text-white hover:bg-indigo-900 transition duration-300"
-        >Previous</a
+  <div class="mt-4 lg:p-10 p-2 text-center flex-auto">
+    {% if paginate.previous %}
+      <button
+        data-link="{{ paginate.previous.url }}"
+        class="pagination-page-link md:p-4 p-2 bg-indigo-800 text-white hover:bg-indigo-900 transition duration-300"
       >
+        Previous
+      </button>
     {% else %}
-      <span class="p-4 mx-2 bg-indigo-100 text-black border-2">Previous</span>
-    {%- endif -%}
+      <span class="md:p-4 p-2 bg-indigo-100 text-black border-2">Previous</span>
+    {% endif %}
 
     {% for part in paginate.parts %}
       {% if part.title != paginate.current_page %}
-        <a href="{{ part.url }}" class="p-4 bg-indigo-800 text-white hover:bg-indigo-900 transition duration-300">
-          {{- part.title -}}
-        </a>
+        <button
+          data-link="{{ part.url }}"
+          class="pagination-page-link md:p-4 p-2 bg-indigo-800 text-white hover:bg-indigo-900 transition duration-300"
+        >
+          {{ part.title }}
+        </button>
       {% else %}
-        <span class="p-4 mx-2 bg-indigo-100 text-black border-2">{{ part.title }}</span>
+        <span class="md:p-4 p-2 bg-indigo-100 text-black border-2">{{ part.title }}</span>
       {% endif %}
     {% endfor %}
 
-    {%- if paginate.next -%}
-      <a href="{{ paginate.next.url }}" class="p-4 bg-indigo-800 text-white hover:bg-indigo-900 transition duration-300"
-        >Next</a
+    {% if paginate.next %}
+      <button
+        data-link="{{ paginate.next.url }}"
+        class="pagination-page-link md:p-4 p-2 bg-indigo-800 text-white hover:bg-indigo-900 transition duration-300"
       >
+        Next
+      </button>
     {% else %}
-      <span class="p-4 mx-2 bg-indigo-100 text-black border-2">Next</span>
-    {%- endif -%}
+      <span class="md:p-4 p-2 mx-2 bg-indigo-100 text-black border-2">Next</span>
+    {% endif %}
   </div>
 {% endif %}

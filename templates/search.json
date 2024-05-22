@@ -9,6 +9,9 @@
     "main-search": {
       "type": "main-search"
     },
+    "products-featured": {
+      "type": "products-featured"
+    },
     "footer": {
       "type": "footer"
     }
@@ -17,6 +20,7 @@
     "navbar",
     "search-bar",
     "main-search",
+    "products-featured",
     "footer"
   ]
 }

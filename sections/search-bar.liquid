@@ -1,7 +1,7 @@
-<div class="mx-48 py-10">
+<div class="lg:mx-32 md:mx-16 mx-8 lg:py-20 md:py-16 py-10">
   <form action="{{ routes.search_url }}" method="get" role="search" class="search">
     <div class="mt-4 grid grid-cols-12 gap-4">
-      <div class="col-span-10 ">
+      <div class="md:col-span-10 col-span-12">
         <input
           class="p-4 border-2 border-gray-400 w-full"
           type="search"
@@ -10,7 +10,7 @@
           value="{{ search.terms }}"
         >
       </div>
-      <div class="col-span-2">
+      <div class="md:col-span-2 col-span-12">
         <button class="p-4 w-full bg-indigo-800 text-white hover:bg-indigo-900" type="submit">Search</button>
       </div>
     </div>

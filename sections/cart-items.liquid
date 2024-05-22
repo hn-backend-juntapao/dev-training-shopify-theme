@@ -1,4 +1,4 @@
-<div class="mx-48 py-10">
+<div class="lg:px-48 md:px-8 px-4 py-10">
   {% if cart != empty %}
     <div class="text-center">
       <p>These are your items for checkout</p>
@@ -7,18 +7,18 @@
     </div>
     {% form 'cart', cart %}
       <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-5 p-2"></div>
-        <div class="col-span-3 p-2 text-center">Quantity</div>
-        <div class="col-span-2 p-2 text-right">Price</div>
+        <div class="col-span-5 p-2 md:inline hidden"></div>
+        <div class="lg:col-span-3 md:col-span-2 col-span-3 p-2 text-center md:inline hidden">Quantity</div>
+        <div class="lg:col-span-2 md:col-span-3 col-span-2 p-2 text-right md:inline hidden">Price</div>
         <div class="col-span-2 p-2 text-center"></div>
         {% for item in cart.items %}
           <hr class="col-span-12">
-          <div class="col-span-5 p-2">
+          <div class="md:col-span-5 col-span-12 p-2">
             <img src="{{ item.image | image_url: height:100 }}" width="auto" height="auto">
             <h2>{{ item.title }}</h2>
             <p>{{ item.price | money }}</p>
           </div>
-          <div class="col-span-3 text-center">
+          <div class="lg:col-span-3 md:col-span-2 col-span-3 text-center">
             <input
               class="border p-4 inline-block w-full text-center"
               type="number"
@@ -26,10 +26,10 @@
               value="{{ item.quantity }}"
             >
           </div>
-          <div class="col-span-2 p-2 text-right">
+          <div class="lg:col-span-2 md:col-span-3 col-span-5 p-2 text-right">
             <p class="my-2">{{ item.final_line_price | money }}</p>
           </div>
-          <div class="col-span-2 px-2 text-center">
+          <div class="md:col-span-2 col-span-4 px-2 text-center">
             <a
               class="my-2 px-4 py-2 bg-indigo-500 text-white hover:bg-indigo-900 block"
               href="{{ item.url_to_remove }}"
@@ -40,12 +40,12 @@
 
         <hr class="col-span-12">
 
-        <div class="col-span-5"></div>
-        <div class="col-span-3 p-2 text-right font-bold"><p class="my-2">Total:</p></div>
-        <div class="col-span-2 p-2 text-right">
+        <div class="col-span-5 md:inline hidden"></div>
+        <div class="lg:col-span-3 md:col-span-2 col-span-3 p-2 text-right font-bold"><p class="my-2">Total:</p></div>
+        <div class="lg:col-span-2 md:col-span-3 col-span-5 p-2 text-right">
           <p class="my-2 font-bold">{{ cart.total_price | money }}</p>
         </div>
-        <div class="col-span-2 px-2 text-center">
+        <div class="md:col-span-2 col-span-4 px-2 text-center">
           <button
             class="my-2 px-4 py-2 bg-indigo-500 text-white hover:bg-indigo-900 w-full"
             type="submit"
@@ -55,8 +55,8 @@
           </button>
         </div>
 
-        <div class="col-span-10"></div>
-        <div class="col-span-2 text-center">
+        <div class="col-span-10 md:inline hidden"></div>
+        <div class="md:col-span-2 col-span-12 md:mx-0 mx-6 text-center">
           <button
             class="my-2 p-4 bg-indigo-700 text-white hover:bg-indigo-900 w-full"
             type="submit"
@@ -68,7 +68,7 @@
       </div>
     {% endform %}
   {% else %}
-    <div class="col-span-12 text-center text-red-600">Your cart is empty</div>
+    <div class="col-span-12 text-center text-red-600 text-xl">Your cart is empty</div>
   {% endif %}
 </div>
 

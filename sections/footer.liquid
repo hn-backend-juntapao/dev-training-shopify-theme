@@ -1,14 +1,14 @@
 <div class="bg-indigo-950 w-full text-neutral-300 text-sm">
-  <div class="grid grid-cols-12 px-8 py-20 mx-8">
-    <div class="col-span-3 pr-12">
-      <p class="shop-name text-2xl">{{ shop.name | upcase }}</p>
-      <p class="pt-4 text-xs">
+  <div class="grid grid-cols-12 lg:px-8 md:px-4 px-2 py-20 lg:mx-8 md:mx-4 mx-2">
+    <div class="lg:col-span-3 md:col-span-6 col-span-12 pr-12">
+      <p class="shop-name lg:text-lg md:text-2xl text-xl">{{ shop.name | upcase }}</p>
+      <p class="pt-4 lg:text-xs text-sm">
         Ased do eiusm tempor incidi ut labore et dolore magnaian aliqua. Ut enim ad minim veniam.
       </p>
-      <p class="pt-4 text-xs">alejandro.tapao@au.harveynorman.com</p>
+      <p class="pt-4 lg:text-xs text-sm">alejandro.tapao@au.harveynorman.com</p>
       {% comment %} <p class="pt-4 text-xs">+1 (885) 123456789456</p> {% endcomment %}
     </div>
-    <div class="col-span-2">
+    <div class="lg:pt-0 pt-10 lg:col-span-2 md:col-span-6 col-span-12">
       <p class="font-bold">ABOUT THIS PAGE</p>
       <div class="pt-4 text-gray-300">
         {% for link in linklists['main-menu'].links %}
@@ -20,7 +20,7 @@
         {% endfor %}
       </div>
     </div>
-    <div class="col-span-3">
+    <div class="lg:pt-0 pt-10 lg:col-span-3 md:col-span-6 col-span-12">
       <p class="font-bold">TOP BRANDS</p>
       <div class="pt-4 grid grid-cols-2 text-gray-300">
         <div>
@@ -45,13 +45,13 @@
         </div>
       </div>
     </div>
-    <div class="col-span-3">
+    <div class="lg:pt-0 pt-10 lg:col-span-3 md:col-span-6 col-span-12">
       <p class="font-bold">NEWS LETTER</p>
       <p class="pt-4">Subscribe to get latest news update and informations</p>
       <div class="pt-4"><input class="p-1 w-full bg-gray-600 text-white" type="text" placeholder="Email"></div>
     </div>
   </div>
-  <hr class="mx-16 text-gray-300">
+  <hr class="lg:mx-16 md:mx-8 mx-4 text-gray-300">
   <div class="mx-16 mt-4 pb-4">Shopify Theme by Alejandro 👉🏼👈🏼</div>
 </div>
 

@@ -24,15 +24,13 @@ class JunProductVariant extends HTMLElement {
     const dataImage = selectedIndex.getAttribute('data-img');
     const dataId = selectedIndex.value;
     const divImage = document.getElementById('product-image');
-    divImage.setAttribute('style', 'background-image: url(' + dataImage + ');');
+    divImage.setAttribute('style', `background-image: url('${dataImage}');`);
 
     const modalProductImage = document.getElementById('modal-product-image');
-    modalProductImage.setAttribute('style', 'background-image: url(' + dataImage + ');');
+    modalProductImage.setAttribute('style', `background-image: url('${dataImage}');`);
 
     const modalProductId = document.getElementById('modal-product-id');
     modalProductId.value = dataId;
-
-    // console.log(dataId, modalProductId.value);
   }
 }
 

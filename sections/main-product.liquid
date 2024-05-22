@@ -9,9 +9,20 @@
   <cart-items>asdf</cart-items>
 {% endcomment %}
 
-<div class="px-64 py-10">
+<div class="here">
+  {% for section in sections %}
+    <p>{{ section }}</p>
+  {% endfor %}
+</div>
+
+<div class="lg:px-64 md:px-8 px-4 py-10">
   <div class="grid grid-cols-3 gap-4">
-    <div class="col-span-2 border p-2">
+    <div class="md:col-span-2 col-span-12 border p-2">
+      <div class="md:hidden inline text-center">
+        <h1 id="product-title" class="pt-4 text-xl">{{ product.title }}</h1>
+        <div class="pt-4 text-sm text-gray-600">{{ product.description }}</div>
+        <p id="product-price" class="pt-4">{{ product.price | money }}</p>
+      </div>
       <div
         id="product-image"
         class="relative h-96 bg-contain bg-no-repeat bg-center p-0 m-0 "
@@ -38,8 +49,8 @@
         </table>
       </div>
     </div>
-    <div>
-      <div class="text-right">
+    <div class="md:col-span-1 col-span-12 md:px-0 px-2">
+      <div class="text-right w-full">
         <jun-product-compare
           class="p-2 bg-indigo-100 border border-stone-400 hover:bg-indigo-600 hover:text-white transition duration-300 text-sm"
           data-product-id="{{ product.id }}"
@@ -53,10 +64,13 @@
           >
         {% endcomment %}
       </div>
-      <h1 id="product-title" class="pt-4 text-xl">{{ product.title }}</h1>
-      <div class="pt-4 text-sm text-gray-600">{{ product.description }}</div>
-      <p id="product-price" class="pt-4">{{ product.price | money }}</p>
+      <div class="md:inline hidden">
+        <h1 id="product-title" class="pt-4 text-xl">{{ product.title }}</h1>
+        <div class="pt-4 text-sm text-gray-600">{{ product.description }}</div>
+        <p id="product-price" class="pt-4">{{ product.price | money }}</p>
+      </div>
       <input id="product-id" type="hidden" value="{{ product.id }}">
+      <input id="product-currency" type="hidden" value="{{ shop.currency }}">
       {% form 'product', product %}
         {% if product.variants.size > 1 %}
           <jun-product-variant class="mt-4 p-4 border border-gray-900 w-full">
